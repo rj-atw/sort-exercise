@@ -15,9 +15,8 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class TestSorter {
+public class TestCSVMergeSortHelper {
 
     private File createTempCSV(Iterable<String[]> content) throws IOException {
        File output =  File.createTempFile("basicMergeTestInput", ".csv");
@@ -58,7 +57,7 @@ public class TestSorter {
         File file1 = createTempCSV(csv1Content);
         File file2 = createTempCSV(csv2Content);
 
-        File sortedFile = new Sorter(1, 0).merge(file1, file2);
+        File sortedFile = new CSVMergeSortHelper(1, 0).merge(file1, file2);
 
         CSVReader mergedCSV = new CSVReader(new FileReader(sortedFile));
 
@@ -84,7 +83,7 @@ public class TestSorter {
     }
 
     @Test
-    public void testGenerationOfSortedPartitions() throws IOException, CsvValidationException {
+    public void testGenerationOfSinglePartitions() throws IOException, CsvValidationException {
 
         List<String[]> csv1Content = Arrays.asList(
                 new String[] {"apple", "1"},
@@ -97,8 +96,28 @@ public class TestSorter {
 
         File file1 = createTempCSV(csv1Content);
 
-        File[] sortedFiles = new Sorter(bufferSize, 0).generateSortedFilesWithBufferNumberOfRows(file1);
+        File[] sortedFiles = new CSVMergeSortHelper(bufferSize, 0).generateSortedFilesWithBufferNumberOfRows(file1);
 
         Assert.assertEquals("Correct number of files generated", csv1Content.size(), sortedFiles.length);
+    }
+
+
+    @Test
+    public void testGenerationOfSortedPartitions() throws IOException, CsvValidationException {
+
+        List<String[]> csv1Content = Arrays.asList(
+                new String[] {"apple", "1"},
+                new String[] {"banana", "3"},
+                new String[] {"carrot", "5"},
+                new String[] {"donut", "7"}
+        );
+
+        int bufferSize = 2;
+
+        File file1 = createTempCSV(csv1Content);
+
+        File[] sortedFiles = new CSVMergeSortHelper(bufferSize, 0).generateSortedFilesWithBufferNumberOfRows(file1);
+
+        Assert.assertEquals("Correct number of files generated", csv1Content.size()/bufferSize, sortedFiles.length);
     }
 }

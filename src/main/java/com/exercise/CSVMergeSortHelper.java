@@ -9,9 +9,9 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Sorter {
+public class CSVMergeSortHelper {
 
-    Sorter(int bufferLength, int indexToSortBy) {
+    CSVMergeSortHelper(int bufferLength, int indexToSortBy) {
         this.bufferLength = bufferLength;
         this.indexToSortBy = indexToSortBy;
     }
