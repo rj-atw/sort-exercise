@@ -26,7 +26,7 @@ public class CSVSorter implements Callable<Integer> {
 
     private final ExecutorService executorService = Executors.newWorkStealingPool();
 
-    public File sort() throws IOException, CsvValidationException, ExecutionException, InterruptedException {
+    public File sort() throws IOException, CsvValidationException, ExecutionException, InterruptedException, TimeoutException {
         CSVMergeSortHelper mergeSort = new CSVMergeSortHelper(bufferRows, columnIndex1Based-1);
 
         File[] partition = mergeSort.generateSortedFilesWithBufferNumberOfRows(csv);

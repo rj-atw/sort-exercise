@@ -15,6 +15,8 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
 
 public class TestCSVMergeSortHelper {
 
@@ -83,7 +85,7 @@ public class TestCSVMergeSortHelper {
     }
 
     @Test
-    public void testGenerationOfSinglePartitions() throws IOException, CsvValidationException {
+    public void testGenerationOfSinglePartitions() throws IOException, CsvValidationException, InterruptedException, ExecutionException, TimeoutException {
 
         List<String[]> csv1Content = Arrays.asList(
                 new String[] {"apple", "1"},
@@ -103,7 +105,7 @@ public class TestCSVMergeSortHelper {
 
 
     @Test
-    public void testGenerationOfSortedPartitions() throws IOException, CsvValidationException {
+    public void testGenerationOfSortedPartitions() throws IOException, CsvValidationException, InterruptedException, ExecutionException, TimeoutException {
 
         List<String[]> csv1Content = Arrays.asList(
                 new String[] {"apple", "1"},
