@@ -1,4 +1,4 @@
-package com.exercise;
+package com.exercise.mergesort;
 
 public interface ZeroIndexedColumnToSortBy {
     int zeroIndexedColumnToSortBy();

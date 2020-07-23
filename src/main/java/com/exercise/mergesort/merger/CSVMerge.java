@@ -1,6 +1,6 @@
 package com.exercise.mergesort.merger;
 
-import com.exercise.ZeroIndexedColumnToSortBy;
+import com.exercise.mergesort.ZeroIndexedColumnToSortBy;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvValidationException;
@@ -30,16 +30,16 @@ public interface CSVMerge extends ZeroIndexedColumnToSortBy {
 
         while (sorted1Row != null) {
             if(sorted2Row == null || sorted1Row[indexToSortBy].compareTo(sorted2Row[indexToSortBy]) <= 0) {
-                writer.writeNext(sorted1Row);
+                writer.writeNext(sorted1Row,false);
                 sorted1Row = sortedFile1CsvReader.readNext();
             } else {
-                writer.writeNext(sorted2Row);
+                writer.writeNext(sorted2Row,false);
                 sorted2Row = sortedFile2CsvReader.readNext();
             }
         }
 
         while (sorted2Row != null) {
-            writer.writeNext(sorted2Row);
+            writer.writeNext(sorted2Row,false);
             sorted2Row = sortedFile2CsvReader.readNext();
         }
 

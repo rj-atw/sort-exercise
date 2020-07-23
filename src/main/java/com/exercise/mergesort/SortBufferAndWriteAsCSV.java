@@ -1,4 +1,4 @@
-package com.exercise;
+package com.exercise.mergesort;
 
 import com.opencsv.CSVWriter;
 
@@ -19,7 +19,7 @@ public interface SortBufferAndWriteAsCSV extends ZeroIndexedColumnToSortBy {
         File output = File.createTempFile("baseSortedPartition", ".csv");
 
         CSVWriter writer = new CSVWriter(new FileWriter(output));
-        writer.writeAll(buffer);
+        writer.writeAll(buffer, false);
         writer.close();
 
         return output;

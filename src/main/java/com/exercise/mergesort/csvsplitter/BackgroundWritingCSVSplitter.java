@@ -1,6 +1,6 @@
 package com.exercise.mergesort.csvsplitter;
 
-import com.exercise.SortBufferAndWriteAsCSV;
+import com.exercise.mergesort.SortBufferAndWriteAsCSV;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 

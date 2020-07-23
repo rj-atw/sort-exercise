@@ -13,10 +13,11 @@ public interface MergeSort extends CSVSplitter, CSVMerge {
     default File sort(File csv, int bufferRows) throws CsvValidationException, ExecutionException, InterruptedException, IOException, TimeoutException {
         File[] partitions = generateSortedFilesWithBufferNumberOfRows(csv, bufferRows);
 
-        while ( partitions.length != 1) {
+        while ( partitions.length > 1) {
             partitions = mergePairOfFiles(partitions);
         }
 
-        return partitions[0];
+        // There will only be 0 Partitions when the csv is empty
+        return (partitions.length == 0) ? csv : partitions[0];
     }
 }

@@ -37,8 +37,6 @@ public class CSVSorter implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
-        System.out.println(String.format("Args: %s %d %d " + isParallel, csv.toPath(), columnIndex1Based, bufferRows));
-
         Files.copy(sort().toPath(), System.out);
         return 0;
     }

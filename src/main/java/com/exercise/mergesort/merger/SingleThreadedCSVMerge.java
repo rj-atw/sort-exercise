@@ -21,6 +21,7 @@ public abstract class SingleThreadedCSVMerge implements CSVMerge {
                 output.add(partitions[i]);
             }
         }
+
         return output.toArray(new File[0]);
     }
 }
