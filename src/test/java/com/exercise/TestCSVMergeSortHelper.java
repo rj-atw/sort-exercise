@@ -1,5 +1,8 @@
 package com.exercise;
 
+import com.exercise.mergesort.csvsplitter.SingleThreadedCSVSplitter;
+import com.exercise.mergesort.merger.CSVMerge;
+import com.exercise.mergesort.merger.SingleThreadedCSVMerge;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvException;
@@ -59,7 +62,14 @@ public class TestCSVMergeSortHelper {
         File file1 = createTempCSV(csv1Content);
         File file2 = createTempCSV(csv2Content);
 
-        File sortedFile = new CSVMergeSortHelper(1, 0).merge(file1, file2);
+        CSVMerge splitter = new SingleThreadedCSVMerge(){
+            @Override
+            public int zeroIndexedColumnToSortBy() {
+                return 1;
+            }
+        };
+
+        File sortedFile =  splitter.merge(file1, file2);
 
         CSVReader mergedCSV = new CSVReader(new FileReader(sortedFile));
 
@@ -98,7 +108,7 @@ public class TestCSVMergeSortHelper {
 
         File file1 = createTempCSV(csv1Content);
 
-        File[] sortedFiles = new CSVMergeSortHelper(bufferSize, 0).generateSortedFilesWithBufferNumberOfRows(file1);
+        File[] sortedFiles = ((SingleThreadedCSVSplitter) () -> 0).generateSortedFilesWithBufferNumberOfRows(file1, bufferSize);
 
         Assert.assertEquals("Correct number of files generated", csv1Content.size(), sortedFiles.length);
     }
@@ -118,7 +128,7 @@ public class TestCSVMergeSortHelper {
 
         File file1 = createTempCSV(csv1Content);
 
-        File[] sortedFiles = new CSVMergeSortHelper(bufferSize, 0).generateSortedFilesWithBufferNumberOfRows(file1);
+        File[] sortedFiles = ((SingleThreadedCSVSplitter) () -> 0).generateSortedFilesWithBufferNumberOfRows(file1, bufferSize);
 
         Assert.assertEquals("Correct number of files generated", csv1Content.size()/bufferSize, sortedFiles.length);
     }
